@@ -8,6 +8,8 @@ namespace Auroratide.Omnixis.Model {
     private Position position;
     private PlayerInput input;
 
+    [SerializeField] private Config config;
+
     public void Awake() {
       this.input = GetComponent<PlayerInput>();
     }
@@ -17,7 +19,7 @@ namespace Auroratide.Omnixis.Model {
     }
 
     public void Update() {
-      transform.position = new Vector3(position.x, position.y, 0);
+      transform.position = new Vector3(position.x * config.moveScale, position.y * config.moveScale, 0);
     }
 
     private IEnumerator Move() {
@@ -29,6 +31,10 @@ namespace Auroratide.Omnixis.Model {
 
         yield return null;
       }
+    }
+
+    [System.Serializable] public class Config {
+      public float moveScale = 0.25f;
     }
   }
 }
