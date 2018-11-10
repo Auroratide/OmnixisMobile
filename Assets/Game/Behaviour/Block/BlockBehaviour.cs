@@ -26,6 +26,10 @@ namespace Auroratide.Omnixis.Behaviour {
       return new Vector3(position.X, position.Y, 0);
     }
 
+    public void Configure(Config config) {
+      this.config = config;
+    }
+
     [System.Serializable] public class Config {
       public float moveScale = 0.25f;
     }
