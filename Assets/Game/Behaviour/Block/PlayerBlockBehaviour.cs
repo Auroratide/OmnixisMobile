@@ -4,7 +4,7 @@ namespace Auroratide.Omnixis.Behaviour {
   using Auroratide.Omnixis.Model;
 
   [RequireComponent(typeof(InputAxis))]
-  public class BlockBehaviour : MonoBehaviour {
+  public class PlayerBlockBehaviour : MonoBehaviour {
     private Position position;
     private Block block;
 

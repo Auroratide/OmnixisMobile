@@ -7,19 +7,19 @@ namespace Auroratide.Omnixis.Test.Behaviour {
   using Auroratide.Omnixis.Behaviour;
   using Auroratide.Omnixis.Model;
 
-  public class BlockBehaviourTest {
+  public class PlayerBlockBehaviourTest {
     private GameObject obj;
     private Axis axis;
-    private BlockBehaviour behaviour;
+    private PlayerBlockBehaviour behaviour;
 
-    private BlockBehaviour.Config config;
+    private PlayerBlockBehaviour.Config config;
 
     [SetUp] public void Init() {
       obj = new GameObject();
       axis = obj.AddMockComponent<Axis>();
-      behaviour = obj.AddComponent<BlockBehaviour>();
+      behaviour = obj.AddComponent<PlayerBlockBehaviour>();
 
-      config = new BlockBehaviour.Config();
+      config = new PlayerBlockBehaviour.Config();
       config.moveScale = 1.0f;
 
       behaviour.Configure(config);
