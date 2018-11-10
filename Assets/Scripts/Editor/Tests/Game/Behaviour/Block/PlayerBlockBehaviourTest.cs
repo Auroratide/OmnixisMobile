@@ -12,14 +12,14 @@ namespace Auroratide.Omnixis.Test.Behaviour {
     private Axis axis;
     private PlayerBlockBehaviour behaviour;
 
-    private PlayerBlockBehaviour.Config config;
+    private BlockBehaviourConfig config;
 
     [SetUp] public void Init() {
       obj = new GameObject();
       axis = obj.AddMockComponent<Axis>();
       behaviour = obj.AddComponent<PlayerBlockBehaviour>();
 
-      config = new PlayerBlockBehaviour.Config();
+      config = new BlockBehaviourConfig();
       config.moveScale = 1.0f;
 
       behaviour.Configure(config);
