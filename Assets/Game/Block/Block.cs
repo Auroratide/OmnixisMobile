@@ -19,16 +19,12 @@ namespace Auroratide.Omnixis.Model {
     }
 
     public void Update() {
-      transform.position = new Vector3(position.x * config.moveScale, position.y * config.moveScale, 0);
+      transform.position = position.ToVector() * config.moveScale;
     }
 
     private IEnumerator Move() {
       while(true) {
-        if(input.Left())  position.x -= 1;
-        if(input.Right()) position.x += 1;
-        if(input.Up())    position.y += 1;
-        if(input.Down())  position.y -= 1;
-
+        position = position.Translate(input.Translation());
         yield return null;
       }
     }
