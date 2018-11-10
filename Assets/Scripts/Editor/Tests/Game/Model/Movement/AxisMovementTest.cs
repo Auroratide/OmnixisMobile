@@ -4,13 +4,13 @@ using Auroratide.NBehave;
 namespace Auroratide.Omnixis.Test.Model {
   using Auroratide.Omnixis.Model;
 
-  public class MovementTest {
+  public class AxisMovementTest {
     private Axis axis;
-    private Movement movement;
+    private AxisMovement movement;
 
     [SetUp] public void Init() {
       axis = Mock.Basic<Axis>();
-      movement = new Movement(axis);
+      movement = new AxisMovement(axis);
     }
 
     [Test] public void ShouldTranslateLeftWhenHorizontalIsNegative() {

@@ -13,7 +13,7 @@ namespace Auroratide.Omnixis.Behaviour {
     public void Awake() {
       Axis axis = GetComponent<Axis>();
       position = new Position(0, 0);
-      block = new Block(position, new Movement(axis));
+      block = new Block(position, new AxisMovement(axis));
     }
 
     public void Update() {

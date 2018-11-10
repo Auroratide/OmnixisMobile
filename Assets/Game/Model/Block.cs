@@ -1,9 +1,9 @@
 ﻿namespace Auroratide.Omnixis.Model {
   public class Block {
     private Position position;
-    private Movement movement;
+    private AxisMovement movement;
     
-    public Block(Position position, Movement movement) {
+    public Block(Position position, AxisMovement movement) {
       this.position = position;
       this.movement = movement;
     }

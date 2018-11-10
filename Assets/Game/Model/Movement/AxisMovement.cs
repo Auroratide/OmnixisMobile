@@ -1,11 +1,11 @@
 namespace Auroratide.Omnixis.Model {
-  public class Movement {
+  public class AxisMovement {
     private ControlledBool left;
     private ControlledBool right;
     private ControlledBool up;
     private ControlledBool down;
 
-    public Movement(Axis axis) {
+    public AxisMovement(Axis axis) {
       left = new ControlledBool(() => axis.Horizontal() < 0);
       right = new ControlledBool(() => axis.Horizontal() > 0);
       up = new ControlledBool(() => axis.Vertical() > 0);
