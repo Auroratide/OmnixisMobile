@@ -1,0 +1,33 @@
+﻿using UnityEngine;
+
+namespace Auroratide.Omnixis.Behaviour {
+  using Auroratide.Omnixis.Model;
+
+  [RequireComponent(typeof(InputAxis))]
+  public class BlockBehaviour : MonoBehaviour {
+    private Position position;
+    private Block block;
+
+    [SerializeField] private Config config;
+
+    public void Awake() {
+      Axis axis = GetComponent<Axis>();
+      position = new Position(0, 0);
+      block = new Block(position, new Movement(axis));
+    }
+
+    public void Update() {
+      block.Update();
+
+      transform.position = PositionToVector() * config.moveScale;
+    }
+
+    private Vector3 PositionToVector() {
+      return new Vector3(position.X, position.Y, 0);
+    }
+
+    [System.Serializable] public class Config {
+      public float moveScale = 0.25f;
+    }
+  }
+}
