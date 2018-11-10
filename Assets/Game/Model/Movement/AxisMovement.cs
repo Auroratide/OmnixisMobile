@@ -1,5 +1,5 @@
 namespace Auroratide.Omnixis.Model {
-  public class AxisMovement {
+  public class AxisMovement : Movement {
     private ControlledBool left;
     private ControlledBool right;
     private ControlledBool up;
