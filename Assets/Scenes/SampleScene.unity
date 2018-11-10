@@ -407,6 +407,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 825843550}
+  - component: {fileID: 825843551}
   m_Layer: 0
   m_Name: SquareGroup
   m_TagString: Untagged
@@ -428,6 +429,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &825843551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 825843549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a42b3ea90e1de4a51a3bfa799a4a41d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  config:
+    moveScale: 0.25
+    framesDelay: 60
 --- !u!4 &833901025 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4874966226730024, guid: 6a9ed9741682b41f3972e7069841dd71,
