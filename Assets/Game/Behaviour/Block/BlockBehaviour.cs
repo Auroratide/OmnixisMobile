@@ -15,15 +15,11 @@ namespace Auroratide.Omnixis.Behaviour {
     }
 
     public void Update() {
-      transform.position = PositionToVector() * config.moveScale;
+      transform.position = new Vector3(position.X, position.Y, 0) * config.moveScale;
     }
 
     public Block GetBlock() {
       return block;
-    }
-
-    private Vector3 PositionToVector() {
-      return new Vector3(position.X, position.Y, 0);
     }
 
     public void Configure(Config config) {

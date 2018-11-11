@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4874966226730024}
   - component: {fileID: 212909156823176268}
+  - component: {fileID: 114880541419018624}
   m_Layer: 0
   m_Name: WhiteBlock
   m_TagString: Untagged
@@ -40,6 +41,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114880541419018624
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1539522136801844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e412323675bf42079300341477fa412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  config:
+    moveScale: 0.25
+    x: 1
+    y: 1
 --- !u!212 &212909156823176268
 SpriteRenderer:
   m_ObjectHideFlags: 1
