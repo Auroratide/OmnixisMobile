@@ -10,7 +10,7 @@ namespace Auroratide.Omnixis.Behaviour {
 
     [SerializeField] private Config config;
 
-    public BlockGroup CreateCore() {
+    public CoreBlockGroup CreateCore(List<BlockGroup> groups) {
       List<Block> blocks = new List<Block>();
       blocks.Add(CreateBlock(new Position(-1, -1), Color.White).GetBlock());
       blocks.Add(CreateBlock(new Position(-1, 0), Color.White).GetBlock());
@@ -22,7 +22,7 @@ namespace Auroratide.Omnixis.Behaviour {
       blocks.Add(CreateBlock(new Position(1, 0), Color.White).GetBlock());
       blocks.Add(CreateBlock(new Position(1, 1), Color.White).GetBlock());
 
-      return new BlockGroup(blocks, new AxisMovement(GetComponent<Axis>()));
+      return new CoreBlockGroup(blocks, new AxisMovement(GetComponent<Axis>()), groups);
     }
 
     public BlockGroup CreateSquare(Position p) {

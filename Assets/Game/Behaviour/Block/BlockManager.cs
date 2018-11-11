@@ -8,7 +8,7 @@ namespace Auroratide.Omnixis.Behaviour {
   [RequireComponent(typeof(BlockGroupFactory))]
   public class BlockManager : MonoBehaviour {
     private BlockGroupFactory factory;
-    private BlockGroup core;
+    private CoreBlockGroup core;
     private List<BlockGroup> groups;
     private int frame;
 
@@ -18,28 +18,15 @@ namespace Auroratide.Omnixis.Behaviour {
       factory = GetComponent<BlockGroupFactory>();
       groups = new List<BlockGroup>();
       groups.Add(factory.CreateSquare(new Position(0, -7)));
-      core = factory.CreateCore();
+      core = factory.CreateCore(groups);
       frame = 0;
     }
 
     public void Update() {
-      core.Update();
-      groups.ForEach(group => {
-        if(core.Overlaps(group)) {
-          group.Translate(core.GetLastTranslation());
-          core.Merge(group);
-        }
-      });
+      core.Update(core);
 
       if(++frame % config.updateDelay == 0)
-        groups.ForEach(group => group.Update());
-
-      groups.ForEach(group => {
-        if(core.Overlaps(group)) {
-          group.UndoLastMovement();
-          core.Merge(group);
-        }
-      });
+        groups.ForEach(group => group.Update(core));
     }
 
     [System.Serializable] public class Config {

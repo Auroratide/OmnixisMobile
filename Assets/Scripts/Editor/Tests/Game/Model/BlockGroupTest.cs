@@ -19,9 +19,10 @@ namespace Auroratide.Omnixis.Test.Model {
       blocks.Add(apple);
       blocks.Add(orange);
       BlockGroup group = new BlockGroup(blocks, movement);
+      CoreBlockGroup core = new CoreBlockGroup(new List<Block>(), movement, new List<BlockGroup> { group });
 
       // WHEN
-      group.Update();
+      group.Update(core);
 
       // THEN
       Verify.That(() => apple.Move(translation)).IsCalled();
