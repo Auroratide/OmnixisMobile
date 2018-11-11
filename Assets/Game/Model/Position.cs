@@ -20,5 +20,14 @@
       this.x += translation.X;
       this.y += translation.Y;
     }
+
+    public override bool Equals(object obj) {
+      Position other = obj as Position;
+      return this.x == other.x && this.y == other.y;
+    }
+
+    public override int GetHashCode() {
+      return x * 31 + y;
+    }
   }
 }
