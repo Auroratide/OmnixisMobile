@@ -1,15 +1,13 @@
 ﻿namespace Auroratide.Omnixis.Model {
   public class Block {
     private Position position;
-    private Movement movement;
     
-    public Block(Position position, Movement movement) {
+    public Block(Position position) {
       this.position = position;
-      this.movement = movement;
     }
 
-    public void Update() {
-      position.Translate(movement.Translation());
+    public void Move(Translation translation) {
+      position.Translate(translation);
     }
   }
 }
