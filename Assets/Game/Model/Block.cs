@@ -9,5 +9,9 @@
     public virtual void Move(Translation translation) {
       position.Translate(translation);
     }
+
+    public virtual bool Overlaps(Block other) {
+      return this.position.Equals(other.position);
+    }
   }
 }

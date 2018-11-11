@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Auroratide.Omnixis.Model {
@@ -13,6 +14,19 @@ namespace Auroratide.Omnixis.Model {
     public void Update() {
       Translation translation = movement.Translation();
       blocks.ForEach(block => block.Move(translation));
+    }
+
+    public bool Overlaps(BlockGroup other) {
+      return this.blocks.Any(thisBlock =>
+        other.blocks.Any(otherBlock =>
+          thisBlock.Overlaps(otherBlock)
+        )
+      );
+    }
+
+    public void Merge(BlockGroup other) {
+      this.blocks.AddRange(other.blocks);
+      other.blocks.RemoveAll(_ => true);
     }
   }
 }
