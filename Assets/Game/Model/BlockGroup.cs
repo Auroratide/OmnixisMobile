@@ -11,7 +11,8 @@ namespace Auroratide.Omnixis.Model {
     }
 
     public void Update() {
-      blocks.ForEach(block => block.Move(movement.Translation()));
+      Translation translation = movement.Translation();
+      blocks.ForEach(block => block.Move(translation));
     }
   }
 }

@@ -10,7 +10,7 @@ namespace Auroratide.Omnixis.Behaviour {
     [SerializeField] private Config config;
 
     public void Awake() {
-      position = new Position(0, 0);
+      position = new Position(config.x, config.y);
       block = new Block(position);
     }
 
@@ -26,8 +26,14 @@ namespace Auroratide.Omnixis.Behaviour {
       return new Vector3(position.X, position.Y, 0);
     }
 
+    public void Configure(Config config) {
+      this.config = config;
+    }
+
     [System.Serializable] public class Config {
       public float moveScale = 0.25f;
+      public int x = 0;
+      public int y = 0;
     }
 
   }
