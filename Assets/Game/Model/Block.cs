@@ -6,7 +6,7 @@
       this.position = position;
     }
 
-    public void Move(Translation translation) {
+    public virtual void Move(Translation translation) {
       position.Translate(translation);
     }
   }
