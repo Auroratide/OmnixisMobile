@@ -21,6 +21,10 @@
       this.y += translation.Y;
     }
 
+    public Position Offset(int x, int y) {
+      return new Position(this.x + x, this.y + y);
+    }
+
     public override bool Equals(object obj) {
       Position other = obj as Position;
       return this.x == other.x && this.y == other.y;

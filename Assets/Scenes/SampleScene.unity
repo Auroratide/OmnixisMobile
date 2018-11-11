@@ -305,6 +305,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2abf1bffdb6104336b8030fcf5edd2ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  config:
+    updateDelay: 60
 --- !u!4 &1811717861
 Transform:
   m_ObjectHideFlags: 0
@@ -331,3 +333,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   config:
     white: {fileID: 114880541419018624, guid: 6a9ed9741682b41f3972e7069841dd71, type: 2}
+    yellow: {fileID: 114486848704208216, guid: e65cafa91ab2747b79c5a8a2244f45c3, type: 2}
