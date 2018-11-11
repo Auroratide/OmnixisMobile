@@ -24,9 +24,22 @@ namespace Auroratide.Omnixis.Behaviour {
 
     public void Update() {
       core.Update();
+      groups.ForEach(group => {
+        if(core.Overlaps(group)) {
+          group.Translate(core.GetLastTranslation());
+          core.Merge(group);
+        }
+      });
 
       if(++frame % config.updateDelay == 0)
         groups.ForEach(group => group.Update());
+
+      groups.ForEach(group => {
+        if(core.Overlaps(group)) {
+          group.UndoLastMovement();
+          core.Merge(group);
+        }
+      });
     }
 
     [System.Serializable] public class Config {

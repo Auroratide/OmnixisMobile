@@ -5,6 +5,7 @@ namespace Auroratide.Omnixis.Model {
   public class BlockGroup {
     private List<Block> blocks;
     private Movement movement;
+    private Translation lastTranslation;
 
     public BlockGroup(List<Block> blocks, Movement movement) {
       this.blocks = blocks;
@@ -12,8 +13,20 @@ namespace Auroratide.Omnixis.Model {
     }
 
     public void Update() {
-      Translation translation = movement.Translation();
+      lastTranslation = movement.Translation();
+      Translate(lastTranslation);
+    }
+
+    public void UndoLastMovement() {
+      Translate(lastTranslation.Negate());
+    }
+
+    public void Translate(Translation translation) {
       blocks.ForEach(block => block.Move(translation));
+    }
+
+    public Translation GetLastTranslation() {
+      return lastTranslation;
     }
 
     public bool Overlaps(BlockGroup other) {

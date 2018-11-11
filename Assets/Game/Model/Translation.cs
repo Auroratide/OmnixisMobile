@@ -15,5 +15,9 @@ namespace Auroratide.Omnixis.Model {
     public int Y {
       get { return y; }
     }
+
+    public Translation Negate() {
+      return new Translation(-x, -y);
+    }
   }
 }
