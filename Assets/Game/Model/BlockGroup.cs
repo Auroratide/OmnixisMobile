@@ -5,20 +5,19 @@ namespace Auroratide.Omnixis.Model {
   public class BlockGroup {
     protected List<Block> blocks;
     protected Movement movement;
+    protected MergeStrategy merging;
 
-    public BlockGroup(List<Block> blocks, Movement movement) {
+    public BlockGroup(List<Block> blocks, Movement movement, MergeStrategy merging) {
       this.blocks = blocks;
       this.movement = movement;
+      this.merging = merging;
     }
 
-    public virtual void Update(CoreBlockGroup core) {
+    public virtual void Update() {
       Translation translation = movement.Translation();
       Translate(translation);
 
-      if(this.Overlaps(core)) {
-        Translate(translation.Negate());
-        core.Merge(this);
-      }
+      merging.Merge(this, translation);
     }
 
     public bool Overlaps(BlockGroup other) {

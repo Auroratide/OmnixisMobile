@@ -6,10 +6,12 @@ namespace Auroratide.Omnixis.Test.Model {
   using Auroratide.Omnixis.Model;
 
   public class BlockGroupTest {
-    Movement movement;
+    private Movement movement;
+    private MergeStrategy merging;
 
     [SetUp] public void Init() {
       movement = Mock.Basic<Movement>();
+      merging = Mock.Basic<MergeStrategy>();
     }
 
     [Category("BlockGroup::Translate")]
@@ -59,8 +61,8 @@ namespace Auroratide.Omnixis.Test.Model {
     [Test] public void ShouldMoveAllTheBlocksFromOneGroupIntoTheOther() {
       List<Block> fruit = new List<Block>() { CreateBlock(1, 1) };
       List<Block> vegetables = new List<Block>() { CreateBlock(1, 2) };
-      BlockGroup fruitGroup = new BlockGroup(fruit, movement);
-      BlockGroup vegetableGroup = new BlockGroup(vegetables, movement);
+      BlockGroup fruitGroup = new BlockGroup(fruit, movement, merging);
+      BlockGroup vegetableGroup = new BlockGroup(vegetables, movement, merging);
 
       fruitGroup.Merge(vegetableGroup);
 
@@ -73,11 +75,7 @@ namespace Auroratide.Omnixis.Test.Model {
     }
 
     private BlockGroup CreateBlockGroup(params Block[] blocks) {
-      return new BlockGroup(new List<Block>(blocks), movement);
-    }
-
-    private CoreBlockGroup CreateCore(params BlockGroup[] groups) {
-      return new CoreBlockGroup(new List<Block>(), movement, new List<BlockGroup>(groups));
+      return new BlockGroup(new List<Block>(blocks), movement, merging);
     }
   }
 }
