@@ -5,9 +5,10 @@ using UnityEngine;
 namespace Auroratide.Omnixis.Behaviour {
   using Auroratide.Omnixis.Model;
 
-  [RequireComponent(typeof(BlockGroupFactory))]
+  [RequireComponent(typeof(InputAxis))]
+  [RequireComponent(typeof(BlockInstantiator))]
   public class BlockManager : MonoBehaviour {
-    private BlockGroupFactory factory;
+    private BlockInstantiator instantiator;
     private BlockGroup core;
     private List<BlockGroup> groups;
     private int frame;
@@ -15,11 +16,16 @@ namespace Auroratide.Omnixis.Behaviour {
     [SerializeField] private Config config;
 
     public void Awake() {
-      factory = GetComponent<BlockGroupFactory>();
+      instantiator = GetComponent<BlockInstantiator>();
       groups = new List<BlockGroup>();
-      core = factory.CreateCore(groups);
+      core = new CoreGroupBuilder(new Position(0, 0), GetComponent<Axis>(), groups)
+        .ForEachBlock(block => instantiator.InstantiateBlock(block))
+        .Build();
 
-      groups.Add(factory.CreateSquare(new Position(0, -7), core));
+      groups.Add(new SquareBuilder(new Position(0, -7), core)
+        .ForEachBlock(block => instantiator.InstantiateBlock(block))
+        .Build());
+
       frame = 0;
     }
 

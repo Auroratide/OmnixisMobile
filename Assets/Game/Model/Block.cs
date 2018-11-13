@@ -6,6 +6,10 @@
       this.position = position;
     }
 
+    public Position Position {
+      get { return position; }
+    }
+
     public virtual void Move(Translation translation) {
       position.Translate(translation);
     }

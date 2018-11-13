@@ -4,22 +4,25 @@ namespace Auroratide.Omnixis.Behaviour {
   using Auroratide.Omnixis.Model;
 
   public class BlockBehaviour : MonoBehaviour {
-    private Position position;
     private Block block;
 
     [SerializeField] private Config config;
 
     public void Awake() {
-      position = new Position(config.x, config.y);
+      Position position = new Position(config.x, config.y);
       block = new Block(position);
     }
 
     public void Update() {
-      transform.position = new Vector3(position.X, position.Y, 0) * config.moveScale;
+      transform.position = new Vector3(block.Position.X, block.Position.Y, 0) * config.moveScale;
     }
 
     public Block GetBlock() {
       return block;
+    }
+
+    public void SetBlock(Block block) {
+      this.block = block;
     }
 
     public void Configure(Config config) {
