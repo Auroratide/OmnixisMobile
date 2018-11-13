@@ -10,9 +10,7 @@ namespace Auroratide.Omnixis.Behaviour {
     [SerializeField] private Config config;
 
     public BlockBehaviour InstantiateBlock(Block block) {
-      BlockBehaviour behaviour = Instantiate(config.white, this.transform);
-      behaviour.SetBlock(block);
-      return behaviour;
+      return config.white.InstantiateWith(block, this.transform);
     }
 
     [System.Serializable] public class Config {

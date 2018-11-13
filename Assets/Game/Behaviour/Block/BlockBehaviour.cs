@@ -9,20 +9,25 @@ namespace Auroratide.Omnixis.Behaviour {
     [SerializeField] private Config config;
 
     public void Awake() {
-      Position position = new Position(config.x, config.y);
-      block = new Block(position);
+      block = new Block(new Position(config.x, config.y));
     }
 
     public void Update() {
-      transform.position = new Vector3(block.Position.X, block.Position.Y, 0) * config.moveScale;
+      transform.position = PositionToVector(block.Position);
     }
 
     public Block GetBlock() {
       return block;
     }
 
-    public void SetBlock(Block block) {
-      this.block = block;
+    public BlockBehaviour InstantiateWith(Block block, Transform parent) {
+      BlockBehaviour behaviour = Instantiate(this, PositionToVector(block.Position), Quaternion.identity, parent);
+      behaviour.block = block;
+      return behaviour;
+    }
+
+    private Vector3 PositionToVector(Position position) {
+      return new Vector3(position.X, position.Y, 0) * config.moveScale;
     }
 
     public void Configure(Config config) {
