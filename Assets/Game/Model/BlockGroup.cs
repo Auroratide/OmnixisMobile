@@ -20,6 +20,10 @@ namespace Auroratide.Omnixis.Model {
       merging.Merge(this, translation);
     }
 
+    public bool IsEmpty() {
+      return !blocks.Any();
+    }
+
     public bool Overlaps(BlockGroup other) {
       return this.blocks.Any(thisBlock =>
         other.blocks.Any(otherBlock =>
