@@ -32,10 +32,10 @@ namespace Auroratide.Omnixis.Behaviour {
     public void Update() {
       core.Update();
 
-      if(heartbeat.Ready())
+      if(heartbeat.Ready()) {
+        groups.RemoveAll(group => group.IsEmpty());
         groups.ForEach(group => group.Update());
-      
-      groups.RemoveAll(group => group.IsEmpty());
+      }
     }
 
     [System.Serializable] public class Config {
