@@ -11,7 +11,7 @@ namespace Auroratide.Omnixis.Behaviour {
     private BlockInstantiator instantiator;
     private BlockGroup core;
     private List<BlockGroup> groups;
-    private int frame;
+    private Heartbeat heartbeat;
 
     [SerializeField] private Config config;
 
@@ -26,18 +26,18 @@ namespace Auroratide.Omnixis.Behaviour {
         .ForEachBlock(block => instantiator.InstantiateBlock(block))
         .Build());
 
-      frame = 0;
+      heartbeat = new Heartbeat(config.heartbeat);
     }
 
     public void Update() {
       core.Update();
 
-      if(++frame % config.updateDelay == 0)
+      if(heartbeat.Ready())
         groups.ForEach(group => group.Update());
     }
 
     [System.Serializable] public class Config {
-      public int updateDelay = 60;
+      public int heartbeat = 60;
     }
   }
 }
