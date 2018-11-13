@@ -34,6 +34,8 @@ namespace Auroratide.Omnixis.Behaviour {
 
       if(heartbeat.Ready())
         groups.ForEach(group => group.Update());
+      
+      groups.RemoveAll(group => group.IsEmpty());
     }
 
     [System.Serializable] public class Config {
