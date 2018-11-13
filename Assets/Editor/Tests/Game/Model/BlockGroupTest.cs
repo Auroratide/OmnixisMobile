@@ -6,59 +6,57 @@ namespace Auroratide.Omnixis.Test.Model {
   using Auroratide.Omnixis.Model;
 
   public class BlockGroupTest {
+    Movement movement;
+
+    [SetUp] public void Init() {
+      movement = Mock.Basic<Movement>();
+    }
+
+    [Category("BlockGroup::Translate")]
     [Test] public void ShouldMoveEachBlockInTheGroupByTheSameTranslation() {
       // GIVEN
       Block apple = Mock.Basic<Block>();
       Block orange = Mock.Basic<Block>();
-
-      Movement movement = Mock.Basic<Movement>();
+      BlockGroup group = CreateBlockGroup(apple, orange);
+      
       Translation translation = new Translation(1, 1);
-      When.Called(() => movement.Translation()).Then.Return(translation);
-
-      List<Block> blocks = new List<Block>();
-      blocks.Add(apple);
-      blocks.Add(orange);
-      BlockGroup group = new BlockGroup(blocks, movement);
-      CoreBlockGroup core = new CoreBlockGroup(new List<Block>(), movement, new List<BlockGroup> { group });
 
       // WHEN
-      group.Update(core);
+      group.Translate(translation);
 
       // THEN
       Verify.That(() => apple.Move(translation)).IsCalled();
       Verify.That(() => orange.Move(translation)).IsCalled();
     }
 
+    [Category("BlockGroup::Overlaps")]
     [Test] public void ShouldReturnTrueWhenAtLeastOneBlockOverlaps() {
-      Movement movement = Mock.Basic<Movement>();
-
       Block apple = CreateBlock(1, 2);
       Block orange = CreateBlock(1, 1);
-      BlockGroup fruit = new BlockGroup(new List<Block> { apple, orange }, movement);
+      BlockGroup fruit = CreateBlockGroup(apple, orange);
 
       Block tomato = CreateBlock(2, 2);
       Block carrot = CreateBlock(1, 2);
-      BlockGroup vegetables = new BlockGroup(new List<Block> { tomato, carrot }, movement);
+      BlockGroup vegetables = CreateBlockGroup(tomato, carrot);
 
       Assert.That(fruit.Overlaps(vegetables), Is.True);
     }
 
+    [Category("BlockGroup::Overlaps")]
     [Test] public void ShouldReturnFalseWhenNoBlocksOverlap() {
-      Movement movement = Mock.Basic<Movement>();
-
       Block apple = CreateBlock(1, 2);
       Block orange = CreateBlock(1, 1);
-      BlockGroup fruit = new BlockGroup(new List<Block> { apple, orange }, movement);
+      BlockGroup fruit = CreateBlockGroup(apple, orange);
 
       Block tomato = CreateBlock(2, 2);
       Block carrot = CreateBlock(2, 3);
-      BlockGroup vegetables = new BlockGroup(new List<Block> { tomato, carrot }, movement);
+      BlockGroup vegetables = CreateBlockGroup(tomato, carrot);
 
       Assert.That(fruit.Overlaps(vegetables), Is.False);
     }
 
+    [Category("BlockGroup::Merge")]
     [Test] public void ShouldMoveAllTheBlocksFromOneGroupIntoTheOther() {
-      Movement movement = Mock.Basic<Movement>();
       List<Block> fruit = new List<Block>() { CreateBlock(1, 1) };
       List<Block> vegetables = new List<Block>() { CreateBlock(1, 2) };
       BlockGroup fruitGroup = new BlockGroup(fruit, movement);
@@ -72,6 +70,14 @@ namespace Auroratide.Omnixis.Test.Model {
 
     private Block CreateBlock(int x, int y) {
       return new Block(new Position(x, y));
+    }
+
+    private BlockGroup CreateBlockGroup(params Block[] blocks) {
+      return new BlockGroup(new List<Block>(blocks), movement);
+    }
+
+    private CoreBlockGroup CreateCore(params BlockGroup[] groups) {
+      return new CoreBlockGroup(new List<Block>(), movement, new List<BlockGroup>(groups));
     }
   }
 }
