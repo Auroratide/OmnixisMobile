@@ -14,19 +14,41 @@ namespace Auroratide.Omnixis.Test.Model {
       merging = Mock.Basic<MergeStrategy>();
     }
 
-    [Category("BlockGroup::Translate")]
-    [Test] public void ShouldMoveEachBlockInTheGroupByTheSameTranslation() {
-      // GIVEN
+    [Category("BlockGroup::Update")]
+    [Test] public void ShouldTranslateAllBlocksByTheSameTranslationWhenUpdating() {
       Block apple = Mock.Basic<Block>();
       Block orange = Mock.Basic<Block>();
       BlockGroup group = CreateBlockGroup(apple, orange);
-      
+
+      Translation translation = new Translation(1, 1);
+      When.Called(() => movement.Translation()).Then.Return(translation);
+
+      group.Update();
+
+      Verify.That(() => apple.Move(translation)).IsCalled();
+      Verify.That(() => orange.Move(translation)).IsCalled();
+    }
+
+    [Category("BlockGroup::Update")]
+    [Test] public void ShouldPerformAMergeWhenUpdating() {
+      BlockGroup group = CreateBlockGroup();
+      Translation translation = new Translation(1, 1);
+      When.Called(() => movement.Translation()).Then.Return(translation);
+
+      group.Update();
+
+      Verify.That(() => merging.Merge(group, translation)).IsCalled();
+    }
+
+    [Category("BlockGroup::Translate")]
+    [Test] public void ShouldMoveEachBlockInTheGroupByTheSameTranslation() {
+      Block apple = Mock.Basic<Block>();
+      Block orange = Mock.Basic<Block>();
+      BlockGroup group = CreateBlockGroup(apple, orange);
       Translation translation = new Translation(1, 1);
 
-      // WHEN
       group.Translate(translation);
 
-      // THEN
       Verify.That(() => apple.Move(translation)).IsCalled();
       Verify.That(() => orange.Move(translation)).IsCalled();
     }
