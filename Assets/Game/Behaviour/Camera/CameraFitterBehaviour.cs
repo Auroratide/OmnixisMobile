@@ -10,14 +10,15 @@ namespace Auroratide.Omnixis.Behaviour {
 
     [SerializeField] private Config config;
     private Camera camera;
-    private Bounds bounds;
+    private Renderer renderer;
 
     public void Start() {
       camera = GetComponent<Camera>();
-      bounds = config.fitTo.bounds;
+      renderer = config.fitTo;
     }
 
     public void LateUpdate() {
+      Bounds bounds = renderer.bounds;
       float screenRatio = (float)Screen.width / (float)Screen.height;
       float targetRatio = bounds.size.x / bounds.size.y;
 

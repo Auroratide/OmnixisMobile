@@ -19,7 +19,12 @@ namespace Auroratide.Omnixis.Behaviour {
       instantiator = GetComponent<BlockInstantiator>();
       groups = new List<BlockGroup>();
       core = new CoreGroupBuilder(new Position(0, 0), GetComponent<Axis>(), groups)
-        .ForEachBlock(block => instantiator.InstantiateBlock(block))
+        .ForEachBlock(block => {
+          BlockBehaviour behaviour = instantiator.InstantiateBlock(block);
+          if(block.Position.Equals(new Position(0, 0))) {
+            config.follower.Follow(behaviour.gameObject);
+          }
+        })
         .Build();
 
       groups.Add(new SquareBuilder(new Position(0, -7), core)
@@ -40,6 +45,7 @@ namespace Auroratide.Omnixis.Behaviour {
 
     [System.Serializable] public class Config {
       public int heartbeat = 60;
+      public FollowBehaviour follower;
     }
   }
 }
